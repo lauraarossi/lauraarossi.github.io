@@ -1,6 +1,10 @@
 ---
 title: Projects
 layout: timeline
+# These sections show as cards instead of a timeline
+cards:
+  - Personal projects
+  - Deloitte client work
 description: Projects by Laura Rossi — Plan Away, Eevie, MTG Chicken Soup, actuarial software built at Deloitte, and earlier research.
 lead: Things I've designed and built on my own time, the client work behind my Deloitte years, and earlier research.
 ---

@@ -45,7 +45,11 @@ Everything is ordinary Markdown, plus a few conventions:
 |---|---|
 | The block between `---` lines at the top | Page settings: `title`, `description` (for Google/LinkedIn previews), `lead` (intro sentence) |
 | `layout: timeline` in the settings | `###` headings become entries on the paw timeline |
-| An all-italic line right under a `###` heading, e.g. `*2021 – 2025 · Dublin*` | The small grey date line |
+| `### Role — Company` (with a long dash) | Role on one line, the company underneath in the page colour |
+| An all-italic line right under a `###` heading, e.g. `*2021 – 2025 · Dublin*` | The date line: the first part as a coloured pill, the rest as small text |
+| `cards:` list in the settings (section names) | Those `##` sections show as a grid of cards instead of a timeline (used on Projects) |
+| `chips:` list in the settings (section names) | `- **Label:** a, b, c` lists in those sections show as rows of chips (used for Skills) |
+| `color: 1`–`6` and `image:` in the settings | Override the page colour and banner photo. By default they follow the page's position in the menu, matching its home tile. |
 | `## Heading` | A new section (and a new timeline) |
 | `#### Heading` | A small sub-heading inside an entry |
 | Several images in one paragraph (no blank lines between them) | A photo grid that opens a lightbox on click |
@@ -57,7 +61,7 @@ To **add a page**, create `content/whatever.md` (it becomes `/whatever/`) and ad
 
 To **add photos**, put them in `public/images/gallery/` (WebP or JPEG, about 1200 px on the long side) and list them in `content/other.md`.
 
-The home tiles are set in the front matter of `content/index.md`. Their colours rotate through the six beach colours automatically.
+The home page is set up in the front matter of `content/index.md`: the intro, the portrait (`portrait:`, remove it to hide the photo), the buttons, the four highlight facts and the tiles. Tile colours rotate through the six beach colours automatically.
 
 ### Printing / PDF
 

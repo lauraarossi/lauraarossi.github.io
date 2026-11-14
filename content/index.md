@@ -1,5 +1,6 @@
 ---
 layout: home
+eyebrow: Dublin, Ireland
 heading: Laura Rossi
 tagline: Senior Software Developer · Actuary (FSAI, FIA) · Storyteller
 intro: |
@@ -11,6 +12,29 @@ intro: |
 
   I'm a Council member of the Society of Actuaries in Ireland, chair of its Recently
   Qualified Committee and the 2025 recipient of the William Hannan Medal.
+
+# Photo next to the intro (leave out to hide it)
+portrait: /images/portrait.webp
+portrait_alt: Laura crouching with her dog in a rock arch, snowy mountains behind
+
+# Buttons under the intro
+actions:
+  - label: Download CV (PDF)
+    href: /downloads/Laura_Rossi_CV.pdf
+    primary: true
+  - label: Get in touch
+    href: mailto:laura.a.rossi.r@gmail.com
+
+# The four facts under the intro
+highlights:
+  - value: FSAI · FIA
+    label: Qualified actuary, 2024
+  - value: 7+ years
+    label: Pricing, reserving and data systems
+  - value: AI in production
+    label: LLM features at AerPrice
+  - value: William Hannan Medal
+    label: Society of Actuaries in Ireland, 2025
 
 # The coloured squares. Images live in public/images/. Colours rotate automatically.
 tiles:
@@ -45,8 +69,6 @@ tiles:
 - **Senior Software Developer at [AerPrice](https://www.aerprice.com/)** — leading the maintenance reserves engine and the LLM features of an aircraft leasing pricing platform.
 - **Council member, Society of Actuaries in Ireland** — and co-lead of the 2026 Current Topics Paper, presenting our member survey on AI and the profession on 3 December 2026.
 - **Building on the side** — [Plan Away](https://plan-away.net/), a group trip planner live in 30+ languages, and a few other [projects](/projects/).
-
-Want the short version? [Download my CV (PDF)](/downloads/Laura_Rossi_CV.pdf).
 
 ## Languages
 

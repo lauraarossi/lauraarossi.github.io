@@ -100,22 +100,59 @@ function renderTokens(tokens, links) {
   return html;
 }
 
+// "Role — Company" headings become two lines: the role, and the organisation under it.
+function entryHeading(text) {
+  const i = text.indexOf(" — ");
+  if (i < 0) return `<h3><span class="role">${marked.parseInline(text)}</span></h3>`;
+  return `<h3><span class="role">${marked.parseInline(text.slice(0, i))}</span><span class="org">${marked.parseInline(text.slice(i + 3))}</span></h3>`;
+}
+
+// "*Aug 2025 – present · Dublin · Python*" -> separate pieces, the first one being the date
+function metaLine(text) {
+  const [when, ...rest] = text.split(" · ");
+  return `<p class="meta"><span class="when">${marked.parseInline(when)}</span>${rest.length ? `<span class="rest">${rest.map((r) => marked.parseInline(r)).join(' <span class="sep">·</span> ')}</span>` : ""}</p>\n`;
+}
+
+// Split "a, b (c, d), e" on commas that are not inside brackets
+function splitList(text) {
+  const out = []; let depth = 0, cur = "";
+  for (const ch of text) {
+    if (ch === "(") depth++;
+    if (ch === ")") depth--;
+    if (ch === "," && depth === 0) { out.push(cur); cur = ""; } else cur += ch;
+  }
+  out.push(cur);
+  return out.map((x) => x.trim().replace(/\.$/, "")).filter(Boolean);
+}
+
+// Lists of "**Label:** a, b, c" become a label with a row of chips
+function chipify(html) {
+  return html.replace(/<ul>\s*((?:<li><strong>[^<]+:<\/strong>[\s\S]*?<\/li>\s*)+)<\/ul>/g, (_, items) =>
+    `<dl class="skills">${items.replace(/<li><strong>([^<]+):<\/strong>([\s\S]*?)<\/li>\s*/g, (_, label, rest) =>
+      `<div><dt>${label}</dt><dd>${splitList(rest).map((c) => `<span class="chip">${c}</span>`).join("")}</dd></div>`)}</dl>`);
+}
+
 // Timeline: "## Section" headings split sections, "### Entry" headings start entries.
-function renderTimeline(body) {
+// Sections named in the page's `cards:` list render as a grid of cards instead;
+// sections named in `chips:` turn "**Label:** a, b, c" lists into chips.
+function renderTimeline(body, { cards = [], chips = [] } = {}) {
   const tokens = marked.lexer(body);
   const links = tokens.links;
   let html = "";
   let pre = [];          // content before any entry in the current section
   let entries = [];      // [{ heading, meta, tokens }]
   let cur = null;
+  let section = "";
 
   const closeSection = () => {
-    html += renderTokens(pre, links);
+    const preHtml = renderTokens(pre, links);
+    html += chips.includes(section) ? chipify(preHtml) : preHtml;
     if (entries.length) {
-      html += `<ol class="timeline">\n`;
+      const asCards = cards.includes(section);
+      html += `<ol class="${asCards ? "cards" : "timeline"}">\n`;
       for (const e of entries) {
-        html += `<li class="entry" id="${slugify(e.heading.text)}">\n<h3>${marked.parseInline(e.heading.text)}</h3>\n`;
-        if (e.meta) html += `<p class="meta">${marked.parseInline(e.meta.tokens[0].text)}</p>\n`;
+        html += `<li class="${asCards ? "card" : "entry"}" id="${slugify(e.heading.text)}">\n${entryHeading(e.heading.text)}\n`;
+        if (e.meta) html += metaLine(e.meta.tokens[0].text);
         html += renderTokens(e.tokens, links) + `</li>\n`;
       }
       html += `</ol>\n`;
@@ -127,6 +164,7 @@ function renderTimeline(body) {
     const tok = tokens[i];
     if (tok.type === "heading" && tok.depth <= 2) {
       closeSection();
+      section = tok.text;
       html += renderTokens([tok], links);
     } else if (tok.type === "heading" && tok.depth === 3) {
       let j = i + 1;
@@ -182,30 +220,68 @@ function build() {
     return { file: f, data, body, slug, url: slug ? `/${slug}/` : "/" };
   });
 
+  // Each page takes a colour (1–6, the home tile colours) and a banner image,
+  // by its position in the menu unless the front matter sets `color:` / `image:`.
+  const navPages = (site.nav || []).filter((n) => n.href.startsWith("/"));
+  const navIndex = (url) => navPages.findIndex((n) => n.href === url);
+  // Matches the home tiles: Experience is tile 1, Projects tile 2, and so on.
+  const colorOf = (p) => p.data.color || (navIndex(p.url) > 0 ? ((navIndex(p.url) - 1) % 6) + 1 : 1);
+
+  const pagerHtml = (p) => {
+    const i = navIndex(p.url);
+    if (i < 1) return "";
+    const prev = navPages[i - 1], next = navPages[i + 1];
+    const link = (n, dir) => {
+      const target = pages.find((q) => q.url === n.href);
+      const c = target ? colorOf(target) : 1;
+      return `<a class="pager-${dir}" href="${esc(n.href)}" style="--c: var(--tile${c})"><span class="pager-label">${dir === "prev" ? "Previous" : "Next"}</span><span class="pager-title">${esc(n.title)}</span></a>`;
+    };
+    return `<nav class="pager" aria-label="More pages">${prev ? link(prev, "prev") : "<span></span>"}${next ? link(next, "next") : ""}</nav>`;
+  };
+
+  const actionsHtml = (actions) => actions
+    ? `<p class="actions">${actions.map((a) => `<a class="button${a.primary ? " primary" : ""}" href="${esc(a.href)}"${a.print ? " data-print" : ""}>${esc(a.label)}</a>`).join(" ")}</p>`
+    : "";
+
   const navHtml = (current) =>
     (site.nav || []).map((n) => `<li><a href="${esc(n.href)}"${n.href === current ? ' aria-current="page"' : ""}>${esc(n.title)}</a></li>`).join("\n");
 
   for (const p of pages) {
     const d = p.data;
     let main;
+    const color = colorOf(p);
     if (d.layout === "home") {
-      main = `<header class="page-header home">
+      main = `<section class="hero">
+<div class="hero-text">
+${d.eyebrow ? `<p class="eyebrow">${inline(d.eyebrow)}</p>` : ""}
 <h1>${esc(d.heading || site.name)}</h1>
 ${d.tagline ? `<p class="tagline">${inline(d.tagline)}</p>` : ""}
-</header>
 ${d.intro ? `<div class="intro">${marked.parse(stripComments(d.intro))}</div>` : ""}
+${actionsHtml(d.actions)}
+</div>
+${d.portrait ? `<figure class="portrait"><img src="${esc(d.portrait)}" alt="${esc(d.portrait_alt || "")}" width="500" height="625"></figure>` : ""}
+</section>
+${d.highlights ? `<ul class="highlights">${d.highlights.map((h, i) => `<li style="--c: var(--tile${(i % 6) + 1})"><strong>${inline(h.value)}</strong><span>${inline(h.label)}</span></li>`).join("")}</ul>` : ""}
 ${renderTiles(d.tiles)}
-${renderDefault(p.body)}`;
+<div class="prose home-more">
+${renderDefault(p.body)}
+</div>`;
     } else {
-      const content = d.layout === "timeline" ? renderTimeline(p.body) : renderDefault(p.body);
+      const content = d.layout === "timeline" ? renderTimeline(p.body, { cards: d.cards, chips: d.chips }) : renderDefault(p.body);
+      const banner = d.image || `/images/beach${color}.webp`;
+      const num = navIndex(p.url);
       main = `<header class="page-header">
-<h1>${esc(d.title)}</h1>
+<div class="banner">
+  <img src="${esc(banner)}" alt="" fetchpriority="high">
+  <div class="banner-text">${num > 0 ? `<span class="eyebrow">${String(num).padStart(2, "0")}</span>` : ""}<h1>${esc(d.title)}</h1></div>
+</div>
 ${d.lead ? `<p class="lead">${inline(d.lead)}</p>` : ""}
-${d.actions ? `<p class="actions">${d.actions.map((a) => `<a class="button${a.primary ? " primary" : ""}" href="${esc(a.href)}"${a.print ? ' data-print' : ""}>${esc(a.label)}</a>`).join(" ")}</p>` : ""}
+${actionsHtml(d.actions)}
 </header>
 <div class="prose">
 ${content}
-</div>`;
+</div>
+${pagerHtml(p)}`;
     }
 
     const title = d.layout === "home" ? `${site.name} · ${site.title}` : `${d.title} · ${site.name}`;
@@ -220,6 +296,7 @@ ${content}
       .replaceAll("{{linkedin}}", esc(site.linkedin))
       .replaceAll("{{year}}", String(new Date().getFullYear()))
       .replaceAll("{{bodyClass}}", esc(d.layout || "page"))
+      .replaceAll("{{pageColor}}", `var(--tile${color})`)
       .replaceAll("{{cssv}}", v.css)
       .replaceAll("{{jsv}}", v.js)
       .replace("{{main}}", () => main);

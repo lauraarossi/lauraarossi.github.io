@@ -1,6 +1,9 @@
 ---
 title: Experience
 layout: timeline
+# "**Label:** a, b, c" lists in these sections show as chips
+chips:
+  - Skills
 description: Laura Rossi's experience — Senior Software Developer at AerPrice, actuarial modelling at Deloitte Ireland, and earlier roles in consulting, research and teaching.
 lead: Seven-plus years building pricing, reserving and data systems — from Solvency II engines and catastrophe models at Deloitte to the core calculation engine of an aircraft leasing pricing platform.
 actions:
@@ -163,9 +166,9 @@ Client interviews, translation and review of legal and medical documents, and re
 ## Skills
 
 - **Actuarial:** pricing, reserving, reinsurance, assumptions management, model validation, actuarial audit, maintenance reserves.
-- **AI and machine learning:** LLM application development (prompt engineering, multi-step pipelines, tool use, retrieval with embeddings, document extraction), machine learning, explainability (SHAP), LoRA fine-tuning pipelines, AI coding agents.
-- **Programming:** Python (pandas, NumPy, Numba, Flask, FastAPI, SQLAlchemy), SQL, JavaScript/TypeScript, React, Next.js, HTML/CSS, R, C++, VBA, PowerShell.
-- **Data and cloud:** Microsoft Azure (including Azure AI Document Intelligence), Google Cloud Platform, SQL Server / T-SQL, PostgreSQL and pgvector, Cosmos DB, Firestore, SAP HANA, Docker, ETL, schema design and normalisation.
-- **Engineering practice:** Git, GitHub Actions, Azure DevOps, Jira, automated testing (pytest, Playwright), code review, release management, documentation, Agile, parallel computing, object-oriented design.
+- **AI and machine learning:** LLM applications, prompt engineering, multi-step pipelines, tool use, retrieval with embeddings, document extraction, machine learning, explainability (SHAP), LoRA fine-tuning, AI coding agents.
+- **Programming:** Python, pandas, NumPy, Numba, Flask, FastAPI, SQLAlchemy, SQL, JavaScript/TypeScript, React, Next.js, HTML/CSS, R, C++, VBA, PowerShell.
+- **Data and cloud:** Microsoft Azure, Azure AI Document Intelligence, Google Cloud Platform, SQL Server / T-SQL, PostgreSQL and pgvector, Cosmos DB, Firestore, SAP HANA, Docker, ETL, schema design and normalisation.
+- **Engineering practice:** Git, GitHub Actions, Azure DevOps, Jira, pytest, Playwright, code review, release management, documentation, Agile, parallel computing, object-oriented design.
 - **Data visualisation:** Power BI, Tableau, Plotly, R, Recharts, Excel.
 - **Governance:** GDPR, EU AI Act, responsible AI, data ethics.
