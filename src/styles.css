@@ -177,16 +177,27 @@ body.menu-open #menu .menu-close { opacity: 1; }
 .button.primary:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
 
 /* ---------- Tiles (home) ---------- */
+/* The grid decides the size of each square; everything inside a tile (title size,
+   letter-spacing, whether the description shows) scales from the tile's own width
+   through container queries, so it works at any screen size. */
 
 .tiles {
-  display: grid; gap: 1.25em;
-  grid-template-columns: repeat(3, 1fr);
+  display: grid;
+  gap: clamp(.6rem, 1.8vw, 1.25rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: 0 0 3em;
 }
-@media (max-width: 980px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .tiles { grid-template-columns: 1fr; } }
+@media (max-width: 860px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* Very narrow phones: one column of short banners rather than tiny squares */
+@media (max-width: 340px) {
+  .tiles { grid-template-columns: 1fr; }
+  .tile { aspect-ratio: 2 / 1; }
+}
 
-.tile { position: relative; aspect-ratio: 1; overflow: hidden; border-radius: 4px; }
+.tile {
+  position: relative; aspect-ratio: 1; overflow: hidden; border-radius: 4px;
+  container-type: inline-size;
+}
 .tile .image { position: absolute; inset: 0; display: block; transition: transform .5s ease; }
 .tile .image img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .tile .image::before {
@@ -207,22 +218,31 @@ body.menu-open #menu .menu-close { opacity: 1; }
 .tile > a {
   position: absolute; inset: 0; z-index: 1; border: 0;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: 1.5em; text-align: center; color: var(--overlay-text);
+  padding: 8cqi; text-align: center; color: var(--overlay-text);
 }
 .tile > a:hover { color: var(--overlay-text); }
 .tile h2 {
-  margin: 0; color: inherit; font-size: 1.1em; letter-spacing: .35em;
+  margin: 0; color: inherit;
+  font-size: clamp(.72rem, 6.5cqi, 1.2rem);
+  letter-spacing: clamp(.1em, 1.4cqi, .35em);
+  margin-right: calc(-1 * clamp(.1em, 1.4cqi, .35em)); /* optical centring: cancel trailing spacing */
   text-shadow: 0 1px 6px rgba(0,0,0,.18);
+  overflow-wrap: anywhere;
 }
 .tile .content {
   max-height: 0; opacity: 0; overflow: hidden; transition: max-height .5s ease, opacity .5s ease;
-  font-weight: 400; line-height: 1.45;
+  font-weight: 400; line-height: 1.4; font-size: clamp(.8rem, 5cqi, 1rem);
 }
 .tile .content p { margin: .6em 0 0; }
 .tile:hover .image, .tile:focus-within .image { transform: scale(1.08); }
 .tile:hover .image::before, .tile:focus-within .image::before { opacity: .92; }
 .tile:hover .content, .tile:focus-within .content { max-height: 10em; opacity: 1; }
-@media (hover: none) { .tile .content { max-height: 10em; opacity: 1; } }
+/* Touch screens can't hover: show the description when the tile has room for it */
+@media (hover: none) {
+  @container (min-width: 15rem) { .tile .content { max-height: 10em; opacity: 1; } }
+}
+/* Small tiles: title only */
+@container (max-width: 11rem) { .tile .content { display: none; } }
 @media (prefers-reduced-motion: reduce) { .tile .image, .tile .content { transition: none; } }
 
 /* ---------- Prose ---------- */

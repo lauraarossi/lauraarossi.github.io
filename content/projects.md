@@ -115,9 +115,8 @@ Based on fieldwork interviews and automated text analysis in Rabat and Cape Town
 
 ### Building community through sports in South African townships: playing towards substantive transition
 
-*Policy paper*
+*2018 · University of Chicago*
 
-<!-- Date unknown: the PDF was exported in Nov 2020. Add the year/course if you want it shown. -->
 South Africa's political transition away from apartheid succeeded, but racial tensions and extreme economic inequality persist. The paper proposes sports education and direct investment in publicly financed, community-managed facilities to support reconciliation across racial lines and community development in the townships. [Download the paper (PDF)](/downloads/community-and-sports-investment-in-south-african-townships.pdf)
 
 ### Is political messaging persuasive or manipulative? Twitter messages about the Supreme Court nominations
