@@ -1,0 +1,20 @@
+// Cloudflare Workers config. The site is static files only (no Worker code), so it
+// runs on the Workers free plan: requests for static assets are free and unlimited.
+// Docs: https://developers.cloudflare.com/workers/static-assets/
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lauraarossi-com",
+  "compatibility_date": "2026-06-01",
+  "assets": {
+    "directory": "./dist",
+    // /experience/ serves dist/experience/index.html; /experience redirects to /experience/
+    "html_handling": "auto-trailing-slash",
+    // unknown paths get dist/404.html with a 404 status
+    "not_found_handling": "404-page"
+  }
+  // Uncomment once the domain is ready to move from GitHub Pages (see README, "Going live").
+  // ,"routes": [
+  //   { "pattern": "lauraarossi.com", "custom_domain": true },
+  //   { "pattern": "www.lauraarossi.com", "custom_domain": true }
+  // ]
+}
