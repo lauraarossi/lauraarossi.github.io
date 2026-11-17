@@ -2,7 +2,7 @@
 
 My personal site: an online CV, projects and a few photos. Every page is a Markdown file. A small build script turns them into static HTML, and Cloudflare serves the result.
 
-## How it fits together
+## Map
 
 ```
 content/          ← the words. One Markdown file per page. This is what you edit.
