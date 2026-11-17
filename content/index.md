@@ -1,7 +1,7 @@
 ---
 layout: home
 heading: Laura Rossi
-tagline: Senior Software Engineer · Actuary (FSAI, FIA) · Storyteller
+tagline: Senior Software Engineer · Actuary (FSAI, FIA)
 intro: |
   I'm a qualified actuary and senior software engineer in Dublin, with 6+ years of
   experience in financial software and actuarial modelling across insurance, reinsurance
@@ -11,6 +11,20 @@ intro: |
 
   I'm a Council member of the Society of Actuaries in Ireland, chair of its Recently
   Qualified Committee and the 2025 recipient of the William Hannan Medal.
+
+# Hero photo (any image in public/images/) and the buttons under the intro.
+photo: /images/gallery/6.webp
+photoAlt: "Laura smiling in a rock arch above a snowy mountain valley, with her dog"
+actions:
+  - label: "Download CV (PDF)"
+    href: /downloads/Laura_Rossi_CV.pdf
+    primary: true
+  - label: LinkedIn
+    href: https://www.linkedin.com/in/laura-agustina-rossi/
+  - label: GitHub
+    href: https://github.com/lauraarossi
+  - label: "Email me"
+    href: mailto:laura.a.rossi.r@gmail.com
 
 # The coloured squares. Images live in public/images/. Colours rotate automatically.
 tiles:
@@ -43,10 +57,8 @@ tiles:
 ## Right now
 
 - **Senior Software Engineer at [AerPrice](https://www.aerprice.com/)** — leading the maintenance reserves engine and the LLM features of an aircraft leasing pricing platform.
-- **Council member, Society of Actuaries in Ireland** — and co-lead of the 2026 Current Topics Paper, presenting our member survey on AI and the profession on 3 December 2026.
+- **Council member, Society of Actuaries in Ireland** — as well as Chair of the Recent Qualifiers Committee and co-lead of the 2026 Current Topics Paper.
 - **Building on the side** — [Plan Away](https://plan-away.net/), a group trip planner live in 30+ languages, and a few other [projects](/projects/).
-
-Want the short version? [Download my CV (PDF)](/downloads/Laura_Rossi_CV.pdf).
 
 ## Languages
 

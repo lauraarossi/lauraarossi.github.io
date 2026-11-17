@@ -31,7 +31,6 @@ ui:
   contact: How to reach me
   email: Email
   pages: Pages
-  credit: Design inspired by "Phantom" by [HTML5 UP](https://html5up.net)
   photo: Photo
   close: Close
   enlarge: Enlarge

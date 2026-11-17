@@ -26,7 +26,6 @@ ui:
   contact: Me contacter
   email: E-mail
   pages: Pages
-  credit: "Design inspiré de « Phantom » par [HTML5 UP](https://html5up.net)"
   photo: Photo
   close: Fermer
   enlarge: Agrandir

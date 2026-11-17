@@ -13,6 +13,20 @@ intro: |
   Soy miembro del Consejo de la Society of Actuaries in Ireland, presido su Recently
   Qualified Committee y recibí la William Hannan Medal en 2025.
 
+# Hero photo (any image in public/images/) and the buttons under the intro.
+photo: /images/gallery/6.webp
+photoAlt: "Laura sonriendo en un arco de roca sobre un valle nevado, con su perra"
+actions:
+  - label: "Descargar CV (PDF)"
+    href: /downloads/Laura_Rossi_CV.pdf
+    primary: true
+  - label: LinkedIn
+    href: https://www.linkedin.com/in/laura-agustina-rossi/
+  - label: GitHub
+    href: https://github.com/lauraarossi
+  - label: "Escríbeme"
+    href: mailto:laura.a.rossi.r@gmail.com
+
 tiles:
   - title: Experiencia
     href: /experience/
@@ -45,8 +59,6 @@ tiles:
 - **Ingeniera de software sénior en [AerPrice](https://www.aerprice.com/)**: lidero el motor de reservas de mantenimiento y las funcionalidades de LLM de una plataforma de tarificación para el arrendamiento de aeronaves.
 - **Miembro del Consejo de la Society of Actuaries in Ireland**: también codirijo el Current Topics Paper de 2026 y presento nuestra encuesta a los socios sobre la IA y la profesión el 3 de diciembre de 2026.
 - **Proyectos propios**: [Plan Away](https://plan-away.net/), un planificador de viajes en grupo disponible en más de 30 idiomas, y algunos [proyectos](/projects/) más.
-
-¿Prefieres la versión corta? [Descarga mi CV (PDF, en inglés)](/downloads/Laura_Rossi_CV.pdf).
 
 ## Idiomas
 

@@ -26,7 +26,6 @@ ui:
   contact: Contacto
   email: Correo electrónico
   pages: Páginas
-  credit: Diseño inspirado en "Phantom" de [HTML5 UP](https://html5up.net)
   photo: Foto
   close: Cerrar
   enlarge: Ampliar

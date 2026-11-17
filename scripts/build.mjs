@@ -103,59 +103,94 @@ function renderTokens(tokens, links) {
   return html;
 }
 
-// Timeline: "## Section" headings split sections, "### Entry" headings start entries.
+// Lists whose items all start with a bold label ("**Actuarial:** pricing, ...") become a grid of cards.
+function tagFacts(html) {
+  return html.replace(/<ul>\n([\s\S]*?)<\/ul>/g, (m, items) => {
+    const n = (items.match(/<li>/g) || []).length;
+    if (!n || n !== (items.match(/<li><strong>/g) || []).length) return m;
+    return `<ul class="facts">\n${items.replace(/<\/strong>\s*[,—–]\s+/g, "</strong>")}</ul>`;
+  });
+}
+
+// Split tokens into "## Section" chunks: [{ heading|null, tokens }]
+function splitSections(tokens) {
+  const out = [];
+  let cur = { heading: null, tokens: [] };
+  for (const tok of tokens) {
+    if (tok.type === "heading" && tok.depth <= 2) {
+      if (cur.heading || cur.tokens.some((t) => t.type !== "space")) out.push(cur);
+      cur = { heading: tok, tokens: [] };
+    } else cur.tokens.push(tok);
+  }
+  if (cur.heading || cur.tokens.some((t) => t.type !== "space")) out.push(cur);
+  return out;
+}
+
+const band = (heading, html, links) =>
+  `<section class="band"><div class="inner">\n${heading ? renderTokens([heading], links) : ""}${html}<div class="trail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div></div></section>\n`;
+
+// An entry's body: "#### Sub-heading" groups become tinted boxes
+function renderEntryBody(tokens, links) {
+  if (!tokens.some((t) => t.type === "heading" && t.depth === 4)) return renderTokens(tokens, links);
+  let html = "", pre = [], groups = [], cur = null;
+  for (const t of tokens) {
+    if (t.type === "heading" && t.depth === 4) { cur = { h: t, tokens: [] }; groups.push(cur); }
+    else (cur ? cur.tokens : pre).push(t);
+  }
+  html += renderTokens(pre, links);
+  html += groups.map((g) => `<div class="sub">${renderTokens([g.h, ...g.tokens], links)}</div>\n`).join("");
+  return html;
+}
+
+// Timeline: "## Section" headings become bands, "### Entry" headings become cards.
 function renderTimeline(body) {
   const tokens = marked.lexer(body);
   const links = tokens.links;
-  let html = "";
-  let pre = [];          // content before any entry in the current section
-  let entries = [];      // [{ heading, meta, tokens }]
-  let cur = null;
-
-  const closeSection = () => {
-    html += renderTokens(pre, links);
+  return splitSections(tokens).map((sec) => {
+    let pre = [], entries = [], cur = null;
+    const toks = sec.tokens;
+    for (let i = 0; i < toks.length; i++) {
+      const tok = toks[i];
+      if (tok.type === "heading" && tok.depth === 3) {
+        let j = i + 1;
+        while (toks[j]?.type === "space") j++;
+        const meta = isMeta(toks[j]) ? toks[j] : null;
+        cur = { heading: tok, meta, tokens: [] };
+        entries.push(cur);
+        if (meta) i = j;
+      } else if (cur) cur.tokens.push(tok);
+      else pre.push(tok);
+    }
+    let html = tagFacts(renderTokens(pre, links));
     if (entries.length) {
       html += `<ol class="timeline">\n`;
       for (const e of entries) {
         html += `<li class="entry" id="${slugify(e.heading.text)}">\n<h3>${marked.parseInline(e.heading.text)}</h3>\n`;
-        if (e.meta) html += `<p class="meta">${marked.parseInline(e.meta.tokens[0].text)}</p>\n`;
-        html += renderTokens(e.tokens, links) + `</li>\n`;
+        // entries without a date still get an (empty) date line, so every card shows its paw
+        html += `<p class="meta">${e.meta ? marked.parseInline(e.meta.tokens[0].text) : ""}</p>\n`;
+        const inner = renderEntryBody(e.tokens, links);
+        if (inner.trim()) html += `<div class="entry-body">\n${inner}</div>\n`;
+        html += `</li>\n`;
       }
       html += `</ol>\n`;
     }
-    pre = []; entries = []; cur = null;
-  };
-
-  for (let i = 0; i < tokens.length; i++) {
-    const tok = tokens[i];
-    if (tok.type === "heading" && tok.depth <= 2) {
-      closeSection();
-      html += renderTokens([tok], links);
-    } else if (tok.type === "heading" && tok.depth === 3) {
-      let j = i + 1;
-      while (tokens[j]?.type === "space") j++;
-      const meta = isMeta(tokens[j]) ? tokens[j] : null;
-      cur = { heading: tok, meta, tokens: [] };
-      entries.push(cur);
-      if (meta) i = j;
-    } else if (cur) cur.tokens.push(tok);
-    else pre.push(tok);
-  }
-  closeSection();
-  return html;
+    return band(sec.heading, html, links);
+  }).join("");
 }
 
 function renderDefault(body) {
   const tokens = marked.lexer(body);
-  return renderTokens(tokens, tokens.links);
+  return splitSections(tokens).map((sec) => band(sec.heading, tagFacts(renderTokens(sec.tokens, tokens.links)), tokens.links)).join("");
 }
 
 const TILE_STYLES = 6;
 function renderTiles(tiles = []) {
   return `<section class="tiles">\n${tiles
     .map((t, i) => `<article class="tile style${(i % TILE_STYLES) + 1}">
-  <span class="image"><img src="${esc(t.image)}" alt="" loading="${i < 3 ? "eager" : "lazy"}"></span>
-  <a href="${esc(t.href)}"><h2>${esc(t.title)}</h2><div class="content"><p>${inline(t.text)}</p></div></a>
+  <a href="${esc(t.href)}">
+    <span class="image"><img src="${esc(t.image)}" alt="" loading="${i < 3 ? "eager" : "lazy"}"></span>
+    <span class="body"><h2>${esc(t.title)}</h2><span class="content">${inline(t.text)}</span></span>
+  </a>
 </article>`)
     .join("\n")}\n</section>\n`;
 }
@@ -229,25 +264,31 @@ function build() {
       const d = p.data;
       let main;
       if (d.layout === "home") {
-        main = `<header class="page-header home">
+        main = `<div class="inner"><div class="hero">
+<div class="hero-text">
+<header class="page-header home">
 <h1>${esc(d.heading || site.name)}</h1>
 ${d.tagline ? `<p class="tagline">${inline(d.tagline)}</p>` : ""}
 </header>
 ${d.intro ? `<div class="intro">${marked.parse(stripComments(d.intro))}</div>` : ""}
-${renderTiles(d.tiles)}
-${renderDefault(p.body)}`;
+${d.actions ? `<p class="actions">${d.actions.map((a) => `<a class="button${a.primary ? " primary" : ""}" href="${esc(a.href)}">${esc(a.label)}</a>`).join(" ")}</p>` : ""}
+</div>
+${d.photo ? `<figure class="hero-photo"><img src="${esc(d.photo)}" alt="${esc(d.photoAlt || "")}" width="768" height="1024" fetchpriority="high"></figure>` : ""}
+</div>
+${renderTiles(d.tiles)}</div>
+<div class="home-body">
+${renderDefault(p.body)}
+</div>`;
       } else {
         const content = d.layout === "timeline" ? renderTimeline(p.body) : renderDefault(p.body);
-        main = `<header class="page-header">
+        main = `<div class="inner"><header class="page-header">
 <h1>${esc(d.title)}</h1>
 ${d.lead ? `<p class="lead">${inline(d.lead)}</p>` : ""}
 ${d.actions ? `<p class="actions">${d.actions.map((a) => `<a class="button${a.primary ? " primary" : ""}" href="${esc(a.href)}"${a.print ? ' data-print' : ""}>${esc(a.label)}</a>`).join(" ")}</p>` : ""}
-</header>
-<div class="prose">
-${content}
-</div>`;
+</header></div>
+${content}`;
       }
-      if (p.fallback && UI.untranslated) main = `<p class="notice" lang="${esc(lang.code)}">${inline(UI.untranslated)}</p>\n<div lang="${esc(defaultLang)}">\n${main}\n</div>`;
+      if (p.fallback && UI.untranslated) main = `<div class="inner"><p class="notice" lang="${esc(lang.code)}">${inline(UI.untranslated)}</p></div>\n<div lang="${esc(defaultLang)}">\n${main}\n</div>`;
       main = localizeLinks(main, prefix);
 
       // Same page in every language, for the dropdown and for search engines
@@ -282,7 +323,7 @@ ${content}
         .replaceAll("{{jsv}}", v.js);
       html = html.replace(/\{\{ui\.([a-zA-Z]+)\}\}/g, (_, k) => {
         if (UI[k] === undefined) throw new Error(`Missing interface text "ui.${k}" for language "${lang.code}" (add it under ui: in content/_site.md)`);
-        return k === "credit" ? inline(UI[k]) : esc(UI[k]);
+        return esc(UI[k]);
       });
       html = html.replace("{{main}}", () => main);
 

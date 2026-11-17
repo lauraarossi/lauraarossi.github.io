@@ -18,7 +18,7 @@
 <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,800;0,900;1,300;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="/assets/styles.css?v={{cssv}}">
 <script src="/assets/main.js?v={{jsv}}" defer></script>
 </head>
@@ -29,8 +29,13 @@
   <header id="header">
     <div class="inner">
       <a href="{{home}}" class="logo">
-        <span class="symbol"><img src="/images/logo.svg" alt="" width="32" height="24"></span><span class="title">{{siteName}}</span>
+        <span class="symbol"><img src="/images/logo.svg" alt="" width="32" height="30"></span><span class="title">{{siteName}}</span>
       </a>
+      <nav class="top-nav" aria-label="{{ui.menu}}">
+        <ul>
+{{nav}}
+        </ul>
+      </nav>
       <details class="lang-switch">
         <summary aria-label="{{ui.language}}: {{langCode}}">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 6h-2.95a15.6 15.6 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.93 8ZM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96ZM4.26 14a8.2 8.2 0 0 1 0-4h3.38a16.5 16.5 0 0 0 0 4H4.26Zm.81 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.99 7.99 0 0 1 5.07 16Zm2.95-8H5.07a7.99 7.99 0 0 1 4.33-3.56A15.6 15.6 0 0 0 8.02 8ZM12 19.96A14.1 14.1 0 0 1 10.09 16h3.82A14.1 14.1 0 0 1 12 19.96ZM14.34 14H9.66a14.7 14.7 0 0 1 0-4h4.68a14.7 14.7 0 0 1 0 4Zm.26 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56ZM16.36 14a16.5 16.5 0 0 0 0-4h3.38a8.2 8.2 0 0 1 0 4h-3.38Z"/></svg>
@@ -59,8 +64,8 @@
   <main id="main">
     <div class="inner">
       <p class="print-only">{{email}} · lauraarossi.com · linkedin.com/in/laura-agustina-rossi · github.com/lauraarossi</p>
-{{main}}
     </div>
+{{main}}
   </main>
 
   <footer id="footer">
@@ -81,7 +86,6 @@
       </section>
       <ul class="copyright">
         <li>&copy; {{year}} {{siteName}}</li>
-        <li>{{ui.credit}}</li>
       </ul>
     </div>
   </footer>

@@ -34,7 +34,7 @@ Member of the Data Science & AI Committee and the Nominations Committee.
 
 ## Writing
 
-Six articles for the Society of Actuaries in Ireland:
+Six articles for the Society of Actuaries in Ireland Current Topics Paper (2026):
 
 - AI explainability: SHAP and other methods
 - The EU AI Act
