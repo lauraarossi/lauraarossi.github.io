@@ -33,7 +33,7 @@ By equivalence with the IFoA.
 
 ### Graduate Certificate in Applied Statistics — Purdue University
 
-*2019 – 2021*
+*Jan 2020 – May 2021*
 
 Probability theory, statistical inference, design of experiments and advanced modelling. GPA 3.50 / 4.00.
 

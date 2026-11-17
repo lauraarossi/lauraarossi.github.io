@@ -59,6 +59,27 @@ To **add photos**, put them in `public/images/gallery/` (WebP or JPEG, about 120
 
 The home tiles are set in the front matter of `content/index.md`. Their colours rotate through the six beach colours automatically.
 
+### Translations
+
+The site is in English, Spanish, French and German. English is the default and lives at `/`; the others live at `/es/`, `/fr/` and `/de/`.
+
+```
+content/
+  experience.md       English (the master copy: it decides which pages exist)
+  es/experience.md    Spanish
+  fr/experience.md    French
+  de/experience.md    German
+  es/_site.md         Spanish menu titles and interface text (Menu, Contact, ...)
+```
+
+- **Editing:** change the English page, then make the same change in each translation. A translation is an ordinary Markdown page in the same format.
+- **Missing translations are fine:** if `content/fr/projects.md` doesn't exist, `/fr/projects/` shows the English page with a short note saying it isn't translated yet. So a new page can go live in English first.
+- **Links:** write internal links the English way (`/projects/`). The build points them at the right language automatically (`/es/projects/`). Anchors use that language's headings: for example, `/projects/#trabajo-para-clientes-de-deloitte` in Spanish.
+- **Downloads** in `public/downloads/` are shared by every language. For a translated CV, upload e.g. `Laura_Rossi_CV_es.pdf` and change the button link in `content/es/experience.md` (and the line at the end of `content/es/index.md`).
+- **Front matter:** put text that contains a colon in quotes, e.g. `lead: "Tout le reste : ..."`. French uses colons a lot. The build stops with the file name if one is missed.
+- **Adding a language:** add it under `languages:` in `content/_site.md`, create `content/<code>/_site.md` with the menu titles and `ui:` text (copy the Spanish one as a starting point), then translate pages one at a time.
+- The language dropdown switches to the same page in the other language. Search engines get `hreflang` tags and a sitemap listing every language.
+
 ### Printing / PDF
 
 Every page has a print stylesheet: no menu or footer, links shown as URLs, and a contact line at the top. **Print this page** on Experience produces the full-length CV. The **Download CV** button serves `public/downloads/Laura_Rossi_CV.pdf`; to update it, upload a new PDF with the same file name.

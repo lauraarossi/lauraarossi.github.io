@@ -13,11 +13,11 @@ Everything here is solo work: designed, built and deployed by me.
 
 *Live · JavaScript, Cloudflare Workers, Firebase (Firestore)*
 
-A web app for planning trips together on one shared drag-and-drop timeline of stays, day trips and travel. It splits costs across the group, totals multi-select items, marks payments and to-dos, summarises stays across the whole trip, zooms between views and autosaves. Available in 30+ languages.
+A web app for planning trips together on one shared drag-and-drop timeline of stays, day trips and travel. It splits costs across the group, including scanning receipts with OCR, totals multi-select items, marks payments and to-dos, summarises stays across the whole trip, zooms between views and autosaves. Available in 30+ languages. Next up: OCR for booking confirmations.
 
 ### [Eevie](https://github.com/lauraarossi/EV_platform)
 
-*2026 · FastAPI, PostgreSQL, React 19, TypeScript · currently offline*
+*Aug – Sep 2026 · FastAPI, PostgreSQL, React 19, TypeScript · currently offline*
 
 Compares what a car really costs to run with the alternative — an EV against petrol or diesel — using actual weekly fuel prices.
 
