@@ -1,7 +1,7 @@
 ---
 layout: home
 heading: Laura Rossi
-tagline: "Senior Software-Ingenieurin · Aktuarin (FSAI, FIA) · Geschichtenerzählerin"
+tagline: "Senior Software-Ingenieurin · Aktuarin (FSAI, FIA)"
 intro: |
   Ich bin qualifizierte Aktuarin und Senior Software-Ingenieurin in Dublin und habe
   über 6 Jahre Erfahrung mit Finanzsoftware und aktuarieller Modellierung in
@@ -57,7 +57,7 @@ tiles:
 ## Aktuell
 
 - **Senior Software-Ingenieurin bei [AerPrice](https://www.aerprice.com/)** – ich leite die Engine für Instandhaltungsreserven und die LLM-Funktionen einer Preisplattform für Flugzeugleasing.
-- **Mitglied des Council der Society of Actuaries in Ireland** – außerdem Co-Leiterin des Current Topics Paper 2026; am 3. Dezember 2026 stelle ich unsere Mitgliederumfrage zu KI und dem Berufsstand vor.
+- **Mitglied des Council der Society of Actuaries in Ireland** – außerdem Vorsitzende des Recently Qualified Committee und Co-Leiterin des Current Topics Paper 2026.
 - **Eigene Projekte** – [Plan Away](https://plan-away.net/), ein Planer für Gruppenreisen in über 30 Sprachen, und einige weitere [Projekte](/projects/).
 
 ## Sprachen

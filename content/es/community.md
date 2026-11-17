@@ -34,7 +34,7 @@ Miembro del Data Science & AI Committee y del Nominations Committee.
 
 ## Artículos
 
-Seis artículos para la Society of Actuaries in Ireland:
+Seis artículos para el Current Topics Paper de 2026 de la Society of Actuaries in Ireland:
 
 - Explicabilidad de la IA: SHAP y otros métodos
 - El Reglamento de IA de la UE
