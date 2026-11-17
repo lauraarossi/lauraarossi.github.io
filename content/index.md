@@ -1,11 +1,11 @@
 ---
 layout: home
 heading: Laura Rossi
-tagline: Senior Software Developer · Actuary (FSAI, FIA) · Storyteller
+tagline: Senior Software Engineer · Actuary (FSAI, FIA) · Storyteller
 intro: |
-  I'm a qualified actuary and senior software developer in Dublin, with 7+ years of
-  experience building pricing, reserving and data systems across insurance, reinsurance
-  and aviation finance. I combine actuarial judgement with production engineering in
+  I'm a qualified actuary and senior software engineer in Dublin, with 6+ years of
+  experience in financial software and actuarial modelling across insurance, reinsurance
+  and aircraft leasing. I combine actuarial judgement with production engineering in
   Python and SQL, and lead the delivery of AI and traditional features, from document
   extraction and natural-language assistants to reserves and cashflow modelling.
 
@@ -42,7 +42,7 @@ tiles:
 
 ## Right now
 
-- **Senior Software Developer at [AerPrice](https://www.aerprice.com/)** — leading the maintenance reserves engine and the LLM features of an aircraft leasing pricing platform.
+- **Senior Software Engineer at [AerPrice](https://www.aerprice.com/)** — leading the maintenance reserves engine and the LLM features of an aircraft leasing pricing platform.
 - **Council member, Society of Actuaries in Ireland** — and co-lead of the 2026 Current Topics Paper, presenting our member survey on AI and the profession on 3 December 2026.
 - **Building on the side** — [Plan Away](https://plan-away.net/), a group trip planner live in 30+ languages, and a few other [projects](/projects/).
 
@@ -50,4 +50,4 @@ Want the short version? [Download my CV (PDF)](/downloads/Laura_Rossi_CV.pdf).
 
 ## Languages
 
-Spanish (native) · English (fluent) · French (advanced) · German (intermediate) · Japanese (elementary) · Arabic (beginner)
+Spanish (native) · English (bilingual) · French (intermediate) · German (elementary) · Japanese (elementary) · Arabic (elementary)

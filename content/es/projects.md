@@ -13,11 +13,11 @@ Todo lo de esta sección es trabajo individual: lo he diseñado, construido y de
 
 *En línea · JavaScript, Cloudflare Workers, Firebase (Firestore)*
 
-Una aplicación web para planificar viajes en grupo sobre una única línea de tiempo compartida en la que se arrastran y sueltan estancias, excursiones de un día y trayectos. Reparte los gastos entre el grupo, suma elementos seleccionados, marca pagos y tareas pendientes, resume las estancias de todo el viaje, cambia de escala entre vistas y guarda automáticamente. Disponible en más de 30 idiomas.
+Una aplicación web para planificar viajes en grupo sobre una única línea de tiempo compartida en la que se arrastran y sueltan estancias, excursiones de un día y trayectos. Reparte los gastos entre el grupo, incluido el escaneo de tiques con OCR, suma elementos seleccionados, marca pagos y tareas pendientes, resume las estancias de todo el viaje, cambia de escala entre vistas y guarda automáticamente. Disponible en más de 30 idiomas. Próximamente: OCR para las confirmaciones de reserva.
 
 ### [Eevie](https://github.com/lauraarossi/EV_platform)
 
-*2026 · FastAPI, PostgreSQL, React 19, TypeScript · fuera de línea por ahora*
+*Ago – sep 2026 · FastAPI, PostgreSQL, React 19, TypeScript · fuera de línea por ahora*
 
 Compara lo que cuesta realmente usar un coche frente a la alternativa — un eléctrico frente a uno de gasolina o diésel — con los precios semanales reales del combustible.
 

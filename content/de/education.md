@@ -33,7 +33,7 @@ Durch Gleichwertigkeit mit dem IFoA.
 
 ### Graduate Certificate in angewandter Statistik — Purdue University
 
-*2019 – 2021*
+*Jan. 2020 – Mai 2021*
 
 Wahrscheinlichkeitstheorie, statistische Inferenz, Versuchsplanung und fortgeschrittene Modellierung. Notendurchschnitt 3,50 / 4,00.
 

@@ -43,6 +43,8 @@ Seis artículos para la Society of Actuaries in Ireland:
 - La inflación
 - La acumulación del riesgo cibernético, con casos como Fastly, CrowdStrike y NotPetya
 
+Anteriormente: *New Perspectives Blog Series – 3 Key SAP HANA Embedded Analytics Challenges*, una serie de artículos de blog para TruQua Enterprises (2018 – 2019, en inglés).
+
 ## Charlas
 
 - **Evento Current Topics**, Society of Actuaries in Ireland — 3 de diciembre de 2026: resultados de la encuesta a los socios sobre la IA y la profesión.

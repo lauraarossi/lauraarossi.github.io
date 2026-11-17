@@ -1,8 +1,8 @@
 ---
 # Site-wide settings. This file is not a page (files starting with _ are skipped).
 name: Laura Rossi
-title: Actuary & Senior Software Developer
-description: Laura Rossi — qualified actuary (FSAI, FIA) and senior software developer in Dublin, building pricing, reserving and data systems for insurance, reinsurance and aviation finance.
+title: Actuary & Senior Software Engineer
+description: Laura Rossi — qualified actuary (FSAI, FIA) and senior software engineer in Dublin, with 6+ years in financial software and actuarial modelling across insurance, reinsurance and aircraft leasing.
 url: https://www.lauraarossi.com
 email: laura.a.rossi.r@gmail.com
 github: https://github.com/lauraarossi

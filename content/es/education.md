@@ -33,7 +33,7 @@ Por equivalencia con el IFoA.
 
 ### Certificado de posgrado en Estadística Aplicada — Purdue University
 
-*2019 – 2021*
+*Ene 2020 – may 2021*
 
 Teoría de la probabilidad, inferencia estadística, diseño de experimentos y modelización avanzada. Nota media 3,50 / 4,00.
 

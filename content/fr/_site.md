@@ -1,7 +1,7 @@
 ---
 # French settings. Anything not listed here comes from content/_site.md.
-title: "Actuaire et développeuse logicielle senior"
-description: "Laura Rossi — actuaire qualifiée (FSAI, FIA) et développeuse logicielle senior à Dublin. Elle conçoit des systèmes de tarification, de provisionnement et de données pour l'assurance, la réassurance et le financement aéronautique."
+title: "Actuaire et ingénieure logicielle senior"
+description: "Laura Rossi — actuaire qualifiée (FSAI, FIA) et ingénieure logicielle senior à Dublin, avec plus de 6 ans d'expérience en logiciels financiers et en modélisation actuarielle pour l'assurance, la réassurance et la location d'avions."
 
 nav:
   - title: Accueil

@@ -1,7 +1,7 @@
 ---
 # German settings. Anything not listed here comes from content/_site.md.
-title: "Aktuarin und Senior Software-Entwicklerin"
-description: "Laura Rossi — qualifizierte Aktuarin (FSAI, FIA) und Senior Software-Entwicklerin in Dublin. Sie entwickelt Tarifierungs-, Reservierungs- und Datensysteme für Versicherung, Rückversicherung und Flugzeugfinanzierung."
+title: "Aktuarin und Senior Software-Ingenieurin"
+description: "Laura Rossi — qualifizierte Aktuarin (FSAI, FIA) und Senior Software-Ingenieurin in Dublin, mit über 6 Jahren Erfahrung in Finanzsoftware und aktuarieller Modellierung für Versicherung, Rückversicherung und Flugzeugleasing."
 
 nav:
   - title: Start

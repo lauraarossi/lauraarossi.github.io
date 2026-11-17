@@ -1,11 +1,11 @@
 ---
 layout: home
 heading: Laura Rossi
-tagline: Desarrolladora de software sénior · Actuaria (FSAI, FIA) · Narradora de historias
+tagline: Ingeniera de software sénior · Actuaria (FSAI, FIA) · Narradora de historias
 intro: |
-  Soy actuaria cualificada y desarrolladora de software sénior en Dublín, con más de
-  7 años de experiencia creando sistemas de tarificación, reservas y datos para seguros,
-  reaseguros y financiación aeronáutica. Combino el criterio actuarial con la ingeniería
+  Soy actuaria cualificada e ingeniera de software sénior en Dublín, con más de
+  6 años de experiencia en software financiero y modelización actuarial para seguros,
+  reaseguros y arrendamiento de aeronaves. Combino el criterio actuarial con la ingeniería
   de producción en Python y SQL, y lidero la entrega de funcionalidades de IA y
   tradicionales, desde la extracción de documentos y asistentes en lenguaje natural hasta
   el cálculo de reservas y la modelización de flujos de caja.
@@ -42,7 +42,7 @@ tiles:
 
 ## Ahora mismo
 
-- **Desarrolladora de software sénior en [AerPrice](https://www.aerprice.com/)**: lidero el motor de reservas de mantenimiento y las funcionalidades de LLM de una plataforma de tarificación para el arrendamiento de aeronaves.
+- **Ingeniera de software sénior en [AerPrice](https://www.aerprice.com/)**: lidero el motor de reservas de mantenimiento y las funcionalidades de LLM de una plataforma de tarificación para el arrendamiento de aeronaves.
 - **Miembro del Consejo de la Society of Actuaries in Ireland**: también codirijo el Current Topics Paper de 2026 y presento nuestra encuesta a los socios sobre la IA y la profesión el 3 de diciembre de 2026.
 - **Proyectos propios**: [Plan Away](https://plan-away.net/), un planificador de viajes en grupo disponible en más de 30 idiomas, y algunos [proyectos](/projects/) más.
 
@@ -50,4 +50,4 @@ tiles:
 
 ## Idiomas
 
-Español (nativo) · inglés (fluido) · francés (avanzado) · alemán (intermedio) · japonés (básico) · árabe (principiante)
+Español (nativo) · inglés (bilingüe) · francés (intermedio) · alemán (básico) · japonés (básico) · árabe (básico)

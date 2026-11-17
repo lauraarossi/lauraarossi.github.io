@@ -1,11 +1,11 @@
 ---
 layout: home
 heading: Laura Rossi
-tagline: "Senior Software-Entwicklerin · Aktuarin (FSAI, FIA) · Geschichtenerzählerin"
+tagline: "Senior Software-Ingenieurin · Aktuarin (FSAI, FIA) · Geschichtenerzählerin"
 intro: |
-  Ich bin qualifizierte Aktuarin und Senior Software-Entwicklerin in Dublin und habe
-  über 7 Jahre Erfahrung mit Tarifierungs-, Reservierungs- und Datensystemen in
-  Versicherung, Rückversicherung und Flugzeugfinanzierung. Ich verbinde aktuarielles
+  Ich bin qualifizierte Aktuarin und Senior Software-Ingenieurin in Dublin und habe
+  über 6 Jahre Erfahrung mit Finanzsoftware und aktuarieller Modellierung in
+  Versicherung, Rückversicherung und Flugzeugleasing. Ich verbinde aktuarielles
   Urteilsvermögen mit produktionsreifer Softwareentwicklung in Python und SQL und leite
   die Umsetzung von KI- und klassischen Funktionen – von der Dokumentenextraktion und
   Assistenten in natürlicher Sprache bis zu Reserven und Cashflow-Modellierung.
@@ -42,7 +42,7 @@ tiles:
 
 ## Aktuell
 
-- **Senior Software-Entwicklerin bei [AerPrice](https://www.aerprice.com/)** – ich leite die Engine für Instandhaltungsreserven und die LLM-Funktionen einer Preisplattform für Flugzeugleasing.
+- **Senior Software-Ingenieurin bei [AerPrice](https://www.aerprice.com/)** – ich leite die Engine für Instandhaltungsreserven und die LLM-Funktionen einer Preisplattform für Flugzeugleasing.
 - **Mitglied des Council der Society of Actuaries in Ireland** – außerdem Co-Leiterin des Current Topics Paper 2026; am 3. Dezember 2026 stelle ich unsere Mitgliederumfrage zu KI und dem Berufsstand vor.
 - **Eigene Projekte** – [Plan Away](https://plan-away.net/), ein Planer für Gruppenreisen in über 30 Sprachen, und einige weitere [Projekte](/projects/).
 
@@ -50,4 +50,4 @@ Lieber die Kurzfassung? [Meinen Lebenslauf herunterladen (PDF, auf Englisch)](/d
 
 ## Sprachen
 
-Spanisch (Muttersprache) · Englisch (fließend) · Französisch (fortgeschritten) · Deutsch (Mittelstufe) · Japanisch (Grundkenntnisse) · Arabisch (Anfängerin)
+Spanisch (Muttersprache) · Englisch (zweisprachig) · Französisch (Mittelstufe) · Deutsch (Grundkenntnisse) · Japanisch (Grundkenntnisse) · Arabisch (Grundkenntnisse)

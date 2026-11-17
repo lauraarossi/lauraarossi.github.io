@@ -43,6 +43,8 @@ Six articles for the Society of Actuaries in Ireland:
 - Inflation
 - Cyber risk aggregation, with case studies including Fastly, CrowdStrike and NotPetya
 
+Earlier: *New Perspectives Blog Series – 3 Key SAP HANA Embedded Analytics Challenges*, a blog series for TruQua Enterprises (2018 – 2019).
+
 ## Talks
 
 - **Current Topics event**, Society of Actuaries in Ireland — 3 December 2026: findings of the member survey on AI and the profession.

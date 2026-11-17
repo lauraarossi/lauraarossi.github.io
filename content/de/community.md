@@ -43,6 +43,8 @@ Sechs Artikel für die Society of Actuaries in Ireland:
 - Inflation
 - Kumulrisiken bei Cyberrisiken, mit Fallstudien u. a. zu Fastly, CrowdStrike und NotPetya
 
+Früher: *New Perspectives Blog Series – 3 Key SAP HANA Embedded Analytics Challenges*, eine Blogreihe für TruQua Enterprises (2018 – 2019, auf Englisch).
+
 ## Vorträge
 
 - **Current-Topics-Veranstaltung**, Society of Actuaries in Ireland – 3. Dezember 2026: Ergebnisse der Mitgliederumfrage zu KI und dem Berufsstand.

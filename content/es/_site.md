@@ -1,7 +1,7 @@
 ---
 # Spanish settings. Anything not listed here comes from content/_site.md.
-title: Actuaria y desarrolladora de software sénior
-description: Laura Rossi — actuaria cualificada (FSAI, FIA) y desarrolladora de software sénior en Dublín. Crea sistemas de tarificación, reservas y datos para seguros, reaseguros y financiación aeronáutica.
+title: Actuaria e ingeniera de software sénior
+description: Laura Rossi — actuaria cualificada (FSAI, FIA) e ingeniera de software sénior en Dublín, con más de 6 años de experiencia en software financiero y modelización actuarial para seguros, reaseguros y arrendamiento de aeronaves.
 
 nav:
   - title: Inicio

@@ -33,7 +33,7 @@ Par équivalence avec l'IFoA.
 
 ### Certificat de troisième cycle en statistique appliquée — Purdue University
 
-*2019 – 2021*
+*Janv. 2020 – mai 2021*
 
 Théorie des probabilités, inférence statistique, plans d'expériences et modélisation avancée. Moyenne 3,50 / 4,00.
 

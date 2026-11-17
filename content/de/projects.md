@@ -13,11 +13,11 @@ Alles hier ist Einzelarbeit: von mir entworfen, gebaut und veröffentlicht.
 
 *Online · JavaScript, Cloudflare Workers, Firebase (Firestore)*
 
-Eine Web-App, um Reisen gemeinsam auf einer geteilten Zeitleiste per Drag-and-drop zu planen: Unterkünfte, Tagesausflüge und Fahrten. Sie teilt Kosten in der Gruppe auf, summiert ausgewählte Einträge, markiert Zahlungen und To-dos, fasst die Unterkünfte der ganzen Reise zusammen, zoomt zwischen Ansichten und speichert automatisch. In über 30 Sprachen verfügbar.
+Eine Web-App, um Reisen gemeinsam auf einer geteilten Zeitleiste per Drag-and-drop zu planen: Unterkünfte, Tagesausflüge und Fahrten. Sie teilt Kosten in der Gruppe auf, auch per OCR-Scan von Belegen, summiert ausgewählte Einträge, markiert Zahlungen und To-dos, fasst die Unterkünfte der ganzen Reise zusammen, zoomt zwischen Ansichten und speichert automatisch. In über 30 Sprachen verfügbar. Als Nächstes: OCR für Buchungsbestätigungen.
 
 ### [Eevie](https://github.com/lauraarossi/EV_platform)
 
-*2026 · FastAPI, PostgreSQL, React 19, TypeScript · derzeit offline*
+*Aug. – Sep. 2026 · FastAPI, PostgreSQL, React 19, TypeScript · derzeit offline*
 
 Vergleicht, was ein Auto im Betrieb wirklich kostet, mit der Alternative – ein Elektroauto gegenüber Benziner oder Diesel – anhand der tatsächlichen wöchentlichen Kraftstoffpreise.
 

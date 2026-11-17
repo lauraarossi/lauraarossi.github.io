@@ -1,8 +1,8 @@
 ---
 title: Experiencia
 layout: timeline
-description: La experiencia de Laura Rossi — desarrolladora de software sénior en AerPrice, modelización actuarial en Deloitte Irlanda y puestos anteriores en consultoría, investigación y docencia.
-lead: Más de siete años creando sistemas de tarificación, reservas y datos — desde motores de Solvencia II y modelos de catástrofes en Deloitte hasta el motor de cálculo central de una plataforma de tarificación para el arrendamiento de aeronaves.
+description: La experiencia de Laura Rossi — ingeniera de software sénior en AerPrice, modelización actuarial en Deloitte Irlanda y puestos anteriores en consultoría, investigación y docencia.
+lead: Más de seis años en software financiero y modelización actuarial — desde motores de Solvencia II y modelos de catástrofes en Deloitte hasta el motor de cálculo central de una plataforma de tarificación para el arrendamiento de aeronaves.
 actions:
   # Para un CV en español, sube public/downloads/Laura_Rossi_CV_es.pdf y cambia el enlace aquí
   - label: Descargar CV (PDF, en inglés)
@@ -17,7 +17,7 @@ actions:
 
 ## Actualidad
 
-### Desarrolladora de software sénior — [AerPrice](https://www.aerprice.com/)
+### Ingeniera de software sénior — [AerPrice](https://www.aerprice.com/)
 
 *Ago 2025 – actualidad · Dublín · Software de tarificación para arrendamiento de aeronaves*
 

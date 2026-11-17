@@ -13,11 +13,11 @@ Tout ce qui figure ici est un travail en solo : conçu, construit et déployé p
 
 *En ligne · JavaScript, Cloudflare Workers, Firebase (Firestore)*
 
-Une application web pour organiser des voyages à plusieurs sur une seule frise chronologique partagée, en glisser-déposer : séjours, excursions à la journée et trajets. Elle répartit les dépenses au sein du groupe, totalise une sélection d'éléments, marque les paiements et les tâches, résume les séjours de tout le voyage, zoome entre les vues et enregistre automatiquement. Disponible dans plus de 30 langues.
+Une application web pour organiser des voyages à plusieurs sur une seule frise chronologique partagée, en glisser-déposer : séjours, excursions à la journée et trajets. Elle répartit les dépenses au sein du groupe, y compris en scannant les tickets par OCR, totalise une sélection d'éléments, marque les paiements et les tâches, résume les séjours de tout le voyage, zoome entre les vues et enregistre automatiquement. Disponible dans plus de 30 langues. Prochaine étape : l'OCR des confirmations de réservation.
 
 ### [Eevie](https://github.com/lauraarossi/EV_platform)
 
-*2026 · FastAPI, PostgreSQL, React 19, TypeScript · hors ligne pour le moment*
+*Août – sept. 2026 · FastAPI, PostgreSQL, React 19, TypeScript · hors ligne pour le moment*
 
 Compare le coût réel d'utilisation d'une voiture avec l'alternative — une électrique face à une essence ou un diesel — à partir des prix hebdomadaires réels des carburants.
 

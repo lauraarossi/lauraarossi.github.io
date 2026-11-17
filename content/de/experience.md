@@ -1,8 +1,8 @@
 ---
 title: Berufserfahrung
 layout: timeline
-description: "Die Berufserfahrung von Laura Rossi – Senior Software-Entwicklerin bei AerPrice, aktuarielle Modellierung bei Deloitte Irland und frühere Stationen in Beratung, Forschung und Lehre."
-lead: "Über sieben Jahre Tarifierungs-, Reservierungs- und Datensysteme – von Solvency-II-Engines und Katastrophenmodellen bei Deloitte bis zur zentralen Berechnungsengine einer Preisplattform für Flugzeugleasing."
+description: "Die Berufserfahrung von Laura Rossi – Senior Software-Ingenieurin bei AerPrice, aktuarielle Modellierung bei Deloitte Irland und frühere Stationen in Beratung, Forschung und Lehre."
+lead: "Über sechs Jahre Finanzsoftware und aktuarielle Modellierung – von Solvency-II-Engines und Katastrophenmodellen bei Deloitte bis zur zentralen Berechnungsengine einer Preisplattform für Flugzeugleasing."
 actions:
   # Für einen deutschen Lebenslauf: public/downloads/Laura_Rossi_CV_de.pdf hochladen und den Link hier ändern
   - label: "Lebenslauf herunterladen (PDF, auf Englisch)"
@@ -17,7 +17,7 @@ actions:
 
 ## Aktuell
 
-### Senior Software-Entwicklerin — [AerPrice](https://www.aerprice.com/)
+### Senior Software-Ingenieurin — [AerPrice](https://www.aerprice.com/)
 
 *Aug. 2025 – heute · Dublin · Preissoftware für Flugzeugleasing*
 
