@@ -26,6 +26,9 @@ const DIST = path.join(ROOT, "dist");
 
 marked.use({ gfm: true });
 
+// Interface strings for the language being built (set in build(), read by the renderers)
+let UI = {};
+
 // ---------- helpers ----------
 
 const esc = (s = "") =>
@@ -70,7 +73,7 @@ function isGallery(tok) {
 function galleryHtml(tok) {
   const imgs = tok.tokens.filter((t) => t.type === "image");
   return `<div class="gallery">${imgs
-    .map((i) => `<button type="button" class="gallery-item" data-full="${esc(i.href)}" aria-label="Enlarge: ${esc(i.text)}"><img src="${esc(i.href)}" alt="${esc(i.text)}" loading="lazy" decoding="async"></button>`)
+    .map((i) => `<button type="button" class="gallery-item" data-full="${esc(i.href)}" aria-label="${esc(UI.enlarge)}: ${esc(i.text)}"><img src="${esc(i.href)}" alt="${esc(i.text)}" loading="lazy" decoding="async"></button>`)
     .join("")}</div>\n`;
 }
 
@@ -163,42 +166,79 @@ function hashOf(file) {
   return crypto.createHash("sha1").update(fs.readFileSync(file)).digest("hex").slice(0, 8);
 }
 
+// Make site-internal page links point at the current language: "/projects/" -> "/es/projects/".
+// Only paths ending in "/" (pages) are rewritten; files such as /downloads/x.pdf are shared.
+function localizeLinks(html, prefix) {
+  if (!prefix) return html;
+  return html.replace(/href="\/((?:[a-z0-9-]+\/)*)(#[^"]*)?"/g, (_, p, hash = "") => `href="${prefix}/${p}${hash}"`);
+}
+
+const isObject = (x) => x && typeof x === "object" && !Array.isArray(x);
+function merge(base, over) {
+  const out = { ...base };
+  for (const [k, v] of Object.entries(over || {})) out[k] = isObject(v) && isObject(base[k]) ? merge(base[k], v) : v;
+  return out;
+}
+
 function build() {
   const t0 = Date.now();
-  const site = readMarkdown(path.join(CONTENT, "_site.md")).data;
+  const baseSite = readMarkdown(path.join(CONTENT, "_site.md")).data;
   const layout = fs.readFileSync(path.join(SRC, "layout.html"), "utf8");
+  const languages = baseSite.languages || [{ code: "en", name: "English" }];
+  const defaultLang = languages[0].code;
 
   fs.rmSync(DIST, { recursive: true, force: true });
   copyDir(PUBLIC, DIST);
   fs.mkdirSync(path.join(DIST, "assets"), { recursive: true });
   for (const f of ["styles.css", "main.js"]) fs.copyFileSync(path.join(SRC, f), path.join(DIST, "assets", f));
   const v = { css: hashOf(path.join(SRC, "styles.css")), js: hashOf(path.join(SRC, "main.js")) };
+  const base = baseSite.url.replace(/\/$/, "");
 
-  const files = fs.readdirSync(CONTENT).filter((f) => f.endsWith(".md") && !f.startsWith("_"));
-  const pages = files.map((f) => {
-    const { data, body } = readMarkdown(path.join(CONTENT, f));
-    const name = f.replace(/\.md$/, "");
-    const slug = data.slug ?? (name === "index" ? "" : name);
-    return { file: f, data, body, slug, url: slug ? `/${slug}/` : "/" };
-  });
+  // The English pages define which pages exist; each language may translate any of them.
+  const pageFiles = fs.readdirSync(CONTENT).filter((f) => f.endsWith(".md") && !f.startsWith("_"));
+  const slugOf = (f, data) => data.slug ?? (f === "index.md" ? "" : f.replace(/\.md$/, ""));
+  const prefixOf = (code) => (code === defaultLang ? "" : `/${code}`);
+  const urlOf = (code, slug) => `${prefixOf(code)}/${slug ? slug + "/" : ""}`;
 
-  const navHtml = (current) =>
-    (site.nav || []).map((n) => `<li><a href="${esc(n.href)}"${n.href === current ? ' aria-current="page"' : ""}>${esc(n.title)}</a></li>`).join("\n");
+  const sitemap = [];
+  let count = 0;
 
-  for (const p of pages) {
-    const d = p.data;
-    let main;
-    if (d.layout === "home") {
-      main = `<header class="page-header home">
+  for (const lang of languages) {
+    const dir = lang.code === defaultLang ? CONTENT : path.join(CONTENT, lang.code);
+    const langSiteFile = path.join(dir, "_site.md");
+    const site = lang.code === defaultLang || !fs.existsSync(langSiteFile) ? baseSite : merge(baseSite, readMarkdown(langSiteFile).data);
+    UI = site.ui || {};
+    const prefix = prefixOf(lang.code);
+
+    const pages = pageFiles.map((f) => {
+      const translated = path.join(dir, f);
+      const fallback = !fs.existsSync(translated);
+      const { data, body } = readMarkdown(fallback ? path.join(CONTENT, f) : translated);
+      const english = readMarkdown(path.join(CONTENT, f)).data;
+      const slug = slugOf(f, english);
+      return { file: f, data, body, slug, fallback, url: urlOf(lang.code, slug) };
+    });
+
+    const navHtml = (current) =>
+      (site.nav || []).map((n) => {
+        const href = n.href.startsWith("/") && n.href.endsWith("/") ? prefix + n.href : n.href;
+        return `<li><a href="${esc(href)}"${href === current ? ' aria-current="page"' : ""}>${esc(n.title)}</a></li>`;
+      }).join("\n");
+
+    for (const p of pages) {
+      const d = p.data;
+      let main;
+      if (d.layout === "home") {
+        main = `<header class="page-header home">
 <h1>${esc(d.heading || site.name)}</h1>
 ${d.tagline ? `<p class="tagline">${inline(d.tagline)}</p>` : ""}
 </header>
 ${d.intro ? `<div class="intro">${marked.parse(stripComments(d.intro))}</div>` : ""}
 ${renderTiles(d.tiles)}
 ${renderDefault(p.body)}`;
-    } else {
-      const content = d.layout === "timeline" ? renderTimeline(p.body) : renderDefault(p.body);
-      main = `<header class="page-header">
+      } else {
+        const content = d.layout === "timeline" ? renderTimeline(p.body) : renderDefault(p.body);
+        main = `<header class="page-header">
 <h1>${esc(d.title)}</h1>
 ${d.lead ? `<p class="lead">${inline(d.lead)}</p>` : ""}
 ${d.actions ? `<p class="actions">${d.actions.map((a) => `<a class="button${a.primary ? " primary" : ""}" href="${esc(a.href)}"${a.print ? ' data-print' : ""}>${esc(a.label)}</a>`).join(" ")}</p>` : ""}
@@ -206,44 +246,69 @@ ${d.actions ? `<p class="actions">${d.actions.map((a) => `<a class="button${a.pr
 <div class="prose">
 ${content}
 </div>`;
+      }
+      if (p.fallback && UI.untranslated) main = `<p class="notice" lang="${esc(lang.code)}">${inline(UI.untranslated)}</p>\n<div lang="${esc(defaultLang)}">\n${main}\n</div>`;
+      main = localizeLinks(main, prefix);
+
+      // Same page in every language, for the dropdown and for search engines
+      const alternates = languages.map((l) => ({ ...l, url: urlOf(l.code, p.slug) }));
+      const isNotFound = p.slug === "404";
+      const hreflang = isNotFound ? "" : alternates
+        .map((a) => `<link rel="alternate" hreflang="${esc(a.code)}" href="${esc(base + a.url)}">`)
+        .concat(`<link rel="alternate" hreflang="x-default" href="${esc(base + urlOf(defaultLang, p.slug))}">`)
+        .join("\n");
+      const langMenu = alternates
+        .map((a) => `<li><a href="${esc(isNotFound ? urlOf(a.code, "") : a.url)}" hreflang="${esc(a.code)}" lang="${esc(a.code)}" data-lang="${esc(a.code)}"${a.code === lang.code ? ' aria-current="true"' : ""}>${esc(a.name)}</a></li>`)
+        .join("");
+
+      const title = d.layout === "home" ? `${site.name} · ${site.title}` : `${d.title} · ${site.name}`;
+      let html = layout
+        .replaceAll("{{lang}}", esc(lang.code))
+        .replaceAll("{{langCode}}", esc(lang.code.toUpperCase()))
+        .replaceAll("{{langMenu}}", langMenu)
+        .replaceAll("{{hreflang}}", hreflang)
+        .replaceAll("{{home}}", `${prefix}/`)
+        .replaceAll("{{title}}", esc(title))
+        .replaceAll("{{description}}", esc(d.description || site.description))
+        .replaceAll("{{canonical}}", esc(base + p.url))
+        .replaceAll("{{siteName}}", esc(site.name))
+        .replaceAll("{{nav}}", navHtml(p.url))
+        .replaceAll("{{email}}", esc(site.email))
+        .replaceAll("{{github}}", esc(site.github))
+        .replaceAll("{{linkedin}}", esc(site.linkedin))
+        .replaceAll("{{year}}", String(new Date().getFullYear()))
+        .replaceAll("{{bodyClass}}", esc(d.layout || "page"))
+        .replaceAll("{{cssv}}", v.css)
+        .replaceAll("{{jsv}}", v.js);
+      html = html.replace(/\{\{ui\.([a-zA-Z]+)\}\}/g, (_, k) => {
+        if (UI[k] === undefined) throw new Error(`Missing interface text "ui.${k}" for language "${lang.code}" (add it under ui: in content/_site.md)`);
+        return k === "credit" ? inline(UI[k]) : esc(UI[k]);
+      });
+      html = html.replace("{{main}}", () => main);
+
+      if (isNotFound) {
+        // Cloudflare serves the nearest 404.html: dist/404.html, dist/es/404.html, ...
+        fs.mkdirSync(path.join(DIST, prefix), { recursive: true });
+        fs.writeFileSync(path.join(DIST, prefix, "404.html"), html);
+      } else {
+        const outDir = path.join(DIST, prefix, p.slug);
+        fs.mkdirSync(outDir, { recursive: true });
+        fs.writeFileSync(path.join(outDir, "index.html"), html);
+        sitemap.push({ loc: base + p.url, alternates });
+      }
+      count++;
     }
-
-    const title = d.layout === "home" ? `${site.name} · ${site.title}` : `${d.title} · ${site.name}`;
-    const html = layout
-      .replaceAll("{{title}}", esc(title))
-      .replaceAll("{{description}}", esc(d.description || site.description))
-      .replaceAll("{{canonical}}", esc(site.url.replace(/\/$/, "") + p.url))
-      .replaceAll("{{siteName}}", esc(site.name))
-      .replaceAll("{{nav}}", navHtml(p.url))
-      .replaceAll("{{email}}", esc(site.email))
-      .replaceAll("{{github}}", esc(site.github))
-      .replaceAll("{{linkedin}}", esc(site.linkedin))
-      .replaceAll("{{year}}", String(new Date().getFullYear()))
-      .replaceAll("{{bodyClass}}", esc(d.layout || "page"))
-      .replaceAll("{{cssv}}", v.css)
-      .replaceAll("{{jsv}}", v.js)
-      .replace("{{main}}", () => main);
-
-    const outDir = path.join(DIST, p.slug);
-    fs.mkdirSync(outDir, { recursive: true });
-    fs.writeFileSync(path.join(outDir, "index.html"), html);
   }
 
-  // 404 page (Cloudflare serves dist/404.html for unknown paths)
-  const notFound = pages.find((p) => p.slug === "404");
-  if (notFound) fs.renameSync(path.join(DIST, "404", "index.html"), path.join(DIST, "404.html")), fs.rmdirSync(path.join(DIST, "404"));
-
-  const base = site.url.replace(/\/$/, "");
   fs.writeFileSync(
     path.join(DIST, "sitemap.xml"),
-    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages
-      .filter((p) => p.slug !== "404")
-      .map((p) => `  <url><loc>${base}${p.url}</loc></url>`)
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${sitemap
+      .map((u) => `  <url><loc>${u.loc}</loc>${u.alternates.map((a) => `<xhtml:link rel="alternate" hreflang="${a.code}" href="${base}${a.url}"/>`).join("")}</url>`)
       .join("\n")}\n</urlset>\n`
   );
   fs.writeFileSync(path.join(DIST, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${base}/sitemap.xml\n`);
 
-  console.log(`Built ${pages.length} pages into dist/ in ${Date.now() - t0} ms`);
+  console.log(`Built ${count} pages in ${languages.length} languages into dist/ in ${Date.now() - t0} ms`);
 }
 
 // ---------- dev server ----------

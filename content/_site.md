@@ -8,6 +8,35 @@ email: laura.a.rossi.r@gmail.com
 github: https://github.com/lauraarossi
 linkedin: https://www.linkedin.com/in/laura-agustina-rossi/
 
+# Languages: the first is the default and lives at the root (/); the others live under
+# /es/, /fr/, ... and their text goes in content/<code>/. Any page without a translation
+# falls back to English with a short notice.
+languages:
+  - code: en
+    name: English
+  - code: es
+    name: Español
+  - code: fr
+    name: Français
+  - code: de
+    name: Deutsch
+
+# Interface text. Each language's content/<code>/_site.md overrides these.
+ui:
+  locale: en_IE
+  skip: Skip to content
+  menu: Menu
+  closeMenu: Close menu
+  language: Language
+  contact: How to reach me
+  email: Email
+  pages: Pages
+  credit: Design inspired by "Phantom" by [HTML5 UP](https://html5up.net)
+  photo: Photo
+  close: Close
+  enlarge: Enlarge
+  untranslated: ""
+
 # The menu and footer links, in order
 nav:
   - title: Home

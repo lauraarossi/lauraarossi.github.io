@@ -28,6 +28,15 @@ document.addEventListener("DOMContentLoaded", () => {
     a.addEventListener("click", (e) => { e.preventDefault(); window.print(); })
   );
 
+  // Language dropdown: close on outside click or Escape
+  const langSwitch = document.querySelector(".lang-switch");
+  if (langSwitch) {
+    document.addEventListener("click", (e) => { if (!langSwitch.contains(e.target)) langSwitch.open = false; });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && langSwitch.open) { langSwitch.open = false; langSwitch.querySelector("summary").focus(); }
+    });
+  }
+
   const box = document.querySelector(".lightbox");
   if (box && typeof box.showModal === "function") {
     const img = box.querySelector("img");
